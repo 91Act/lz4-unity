@@ -10,8 +10,6 @@ set(CMAKE_BUILD_TYPE Debug)
 
 project(lz4)
 
-ADD_DEFINITIONS("-DLUA_32BITS_STRING")
-
 if ( IOS )
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fembed-bitcode")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fembed-bitcode")
@@ -20,12 +18,15 @@ endif ()
 option ( UINT_ESPECIALLY "using custom ulong" OFF )
 
 set (LZ4_SRC 
+    interface.c
     lz4lib/lz4.c
     lz4lib/lz4frame.c
     lz4lib/lz4hc.c
     lz4lib/xxhash.c)
 
-list(APPEND THIRDPART_INC lz4lib)
+list(APPEND INC lz4lib)
+
+include_directories(${INC})
 
 if (APPLE)
     if (IOS)
@@ -40,6 +41,10 @@ if (APPLE)
             ${LZ4_SRC}
         )
         set_target_properties ( lz4 PROPERTIES BUNDLE TRUE )
+        add_executable(run_xlua
+            "main.c"
+            ${LZ4_SRC}
+        )
     endif ()
 else ( )
     add_library(lz4 SHARED
