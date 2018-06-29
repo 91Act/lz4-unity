@@ -4,7 +4,7 @@ This is a C# wrapper for Unity to use [lz4](https://github.com/lz4/lz4/) compres
 # Install
 
 1. Copy `Assets/lz4-unity/lz4.cs` to the Unity project `Assets/lz4-unity`.
-2. Copy all the files under `build/plugin/Plugins` to Unity project `Assets/Plugins`.
+2. Copy all the files under `build/Plugins` to Unity project `Assets/Plugins`.
 
 # Build
 
