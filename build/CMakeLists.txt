@@ -15,6 +15,10 @@ if ( IOS )
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fembed-bitcode")
 endif ()
 
+if ( WIN32 )
+        add_definitions("-DLZ4_DLL_EXPORT")
+endif()
+
 option ( UINT_ESPECIALLY "using custom ulong" OFF )
 
 set (LZ4_SRC 
