@@ -1,0 +1,2 @@
+#TargetFrameworkVersion=v4.0:PlatformToolSet=v140:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit
+Debug|x64|Z:\dev_tools\lz4\build64\CMakeFiles\3.10.0-rc4\|
