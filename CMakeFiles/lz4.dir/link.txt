@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc   -g -arch $(ARCHS_STANDARD_32_64_BIT) -bundle -Wl,-headerpad_max_install_names  -o lz4.bundle/Contents/MacOS/lz4 CMakeFiles/lz4.dir/lz4lib/lz4.c.o CMakeFiles/lz4.dir/lz4lib/lz4frame.c.o CMakeFiles/lz4.dir/lz4lib/lz4hc.c.o CMakeFiles/lz4.dir/lz4lib/xxhash.c.o 
