@@ -41,10 +41,6 @@ if (APPLE)
             ${LZ4_SRC}
         )
         set_target_properties ( lz4 PROPERTIES BUNDLE TRUE )
-        add_executable(run_xlua
-            "main.c"
-            ${LZ4_SRC}
-        )
     endif ()
 else ( )
     add_library(lz4 SHARED
