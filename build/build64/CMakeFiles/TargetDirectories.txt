@@ -1,3 +1,0 @@
-Z:/dev_tools/lz4/build64/CMakeFiles/lz4.dir
-Z:/dev_tools/lz4/build64/CMakeFiles/ALL_BUILD.dir
-Z:/dev_tools/lz4/build64/CMakeFiles/ZERO_CHECK.dir
