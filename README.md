@@ -15,7 +15,7 @@ Under `build` folder there are:
 * `make_osx.sh` Build for macOS. Xcode is required.
 * `make_ios.sh` Build for iOS. Xcode is required.
 * `make_android.sh` Build for android. NDK is required and there should be an environment variable `ANDROID_NDK` points to NDK root.
-* `make_win64.bat` Build for windows 64. VS 2015, or above, is required.
+* `make_win.bat` Build for windows. VS 2015, or above, is required.
 
 # How to use
 

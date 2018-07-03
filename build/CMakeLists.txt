@@ -25,14 +25,16 @@ endif()
 
 option ( UINT_ESPECIALLY "using custom ulong" OFF )
 
-set (LZ4_SRC 
-    interface.c
-    lz4lib/lz4.c
-    lz4lib/lz4frame.c
-    lz4lib/lz4hc.c
-    lz4lib/xxhash.c)
+set(LZ4_SRC lz4/lib)
 
-list(APPEND INC lz4lib)
+set (SRC 
+    interface.c
+    ${LZ4_SRC}/lz4.c
+    ${LZ4_SRC}/lz4frame.c
+    ${LZ4_SRC}/lz4hc.c
+    ${LZ4_SRC}/xxhash.c)
+
+list(APPEND INC ${LZ4_SRC})
 
 include_directories(${INC})
 
@@ -40,18 +42,18 @@ if (APPLE)
     if (IOS)
         set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD)")
         add_library(lz4 STATIC
-           ${LZ4_SRC}
+           ${SRC}
         )
         set_xcode_property (lz4 IPHONEOS_DEPLOYMENT_TARGET "7.0")
     else ()
-        set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD_32_64_BIT)")
+        set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD_64_BIT)")
         add_library(lz4 MODULE
-            ${LZ4_SRC}
+            ${SRC}
         )
         set_target_properties ( lz4 PROPERTIES BUNDLE TRUE )
     endif ()
 else ( )
     add_library(lz4 SHARED
-        ${LZ4_SRC}
+        ${SRC}
     )
 endif ( )
