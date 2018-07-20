@@ -1,19 +1,24 @@
 #include "interface.h"
 #include "string.h"
 
-LZ4FLIB_API int Unity_LZ4_compress(const char* src, size_t srcSize, char* dst, size_t dstCapacity)
+LZ4F_preferences_t Get_Perferences(int compressionLevel)
 {
     LZ4F_preferences_t pref;
     memset(&pref, 0, sizeof(pref));
     pref.frameInfo.contentSize = 1;
+    pref.compressionLevel = compressionLevel;
+    return pref;
+}
+
+LZ4FLIB_API int Unity_LZ4_compress(const char* src, size_t srcSize, char* dst, size_t dstCapacity, int compressionLevel)
+{
+    LZ4F_preferences_t pref = Get_Perferences(compressionLevel);
     return LZ4F_compressFrame(dst, dstCapacity, src, srcSize, &pref);
 }
 
-LZ4FLIB_API int Unity_LZ4_compressSize(int srcSize)
+LZ4FLIB_API int Unity_LZ4_compressSize(int srcSize, int compressionLevel)
 {
-    LZ4F_preferences_t pref;
-    memset(&pref, 0, sizeof(pref));
-    pref.frameInfo.contentSize = 1;
+    LZ4F_preferences_t pref = Get_Perferences(compressionLevel);
     return LZ4F_compressBound(srcSize, &pref);
 }
 

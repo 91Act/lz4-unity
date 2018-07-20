@@ -12,10 +12,10 @@ public class lz4
 #endif
 
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int Unity_LZ4_compress(IntPtr src, int srcSize, IntPtr dst, int dstCapacity);
+        public static extern int Unity_LZ4_compress(IntPtr src, int srcSize, IntPtr dst, int dstCapacity, int compressionLevel);
 
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int Unity_LZ4_compressSize(int srcSize);
+        public static extern int Unity_LZ4_compressSize(int srcSize, int compressionLevel);
 
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int Unity_LZ4_uncompressSize(IntPtr srcBuffer, int srcSize);
@@ -24,19 +24,19 @@ public class lz4
         public static extern int Unity_LZ4_decompress(IntPtr src, int srcSize, IntPtr dst, int dstCapacity);
     }
 
-    public static byte[] Compress(byte[] input)
+    public static byte[] Compress(byte[] input, int compressionLevel = 3)
     {
         byte[] result = null;
 
         if (input != null && input.Length > 0)
         {
-            int maxSize = API.Unity_LZ4_compressSize(input.Length);
+            int maxSize = API.Unity_LZ4_compressSize(input.Length, compressionLevel);
             if (maxSize > 0)
             {
                 var buffer = new byte[maxSize];
                 var srcHandle = GCHandle.Alloc(input, GCHandleType.Pinned);
                 var dstHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-                var actualSize = API.Unity_LZ4_compress(srcHandle.AddrOfPinnedObject(), input.Length, dstHandle.AddrOfPinnedObject(), maxSize);
+                var actualSize = API.Unity_LZ4_compress(srcHandle.AddrOfPinnedObject(), input.Length, dstHandle.AddrOfPinnedObject(), maxSize, compressionLevel);
 
                 if (actualSize > 0)
                 {
